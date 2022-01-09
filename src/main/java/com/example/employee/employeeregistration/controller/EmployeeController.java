@@ -17,7 +17,7 @@ public class EmployeeController {
     public String saveEmployeeDetails(@RequestBody EmployeeDetails details){
 
         employeeRepository.save(details);
-        return "Record is added to database";
+        return "Record of the employee is added to database";
     }
     @GetMapping("/getEmployeeDetails")
     public Optional<EmployeeDetails> getDetailsById(@RequestParam UUID id){
@@ -28,7 +28,7 @@ public class EmployeeController {
     @DeleteMapping("/deleteEmployeeRecord/{id}")
     public String deleteEmployeeRecord(@PathVariable UUID id){
         employeeRepository.deleteById(id);
-        return "the record has been deleted from database";
+        return "the record against the given employee id has been deleted from database";
     }
 
 }
