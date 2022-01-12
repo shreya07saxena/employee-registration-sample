@@ -5,8 +5,8 @@ import com.example.employee.employeeregistration.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 public class EmployeeController {
@@ -19,16 +19,23 @@ public class EmployeeController {
         employeeRepository.save(details);
         return "Record of the employee is added to database";
     }
-    @GetMapping("/getEmployeeDetails")
-    public Optional<EmployeeDetails> getDetailsById(@RequestParam UUID id){
+    @GetMapping("/getEmployeeDetails/{id}")
+    public Optional<EmployeeDetails> getDetailsById(@PathVariable int id){
+
         Optional<EmployeeDetails> employeeDetails=  employeeRepository.findById(id);
         return employeeDetails;
     }
 
-    @DeleteMapping("/deleteEmployeeRecord/{id}")
-    public String deleteEmployeeRecord(@PathVariable UUID id){
-        employeeRepository.deleteById(id);
+    @DeleteMapping("/deleteEmployeeRecord/{eid}")
+    public String deleteEmployeeRecord(@PathVariable int eid){
+        employeeRepository.deleteById(eid);
         return "the record against the given employee id has been deleted from database";
+    }
+
+    @GetMapping("/getEmployeeDetailss")
+    public  List<EmployeeDetails> getAllDetails(){
+        List<EmployeeDetails> employeeDetails= employeeRepository.findAll();
+        return employeeDetails;
     }
 
 }
